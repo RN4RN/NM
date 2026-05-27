@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>🌙 La cafetería — Mishel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg">
+      <div class="noise" aria-hidden="true"></div>
+      <div class="glow g1" aria-hidden="true"></div>
+      <div class="glow g2" aria-hidden="true"></div>
+      <div class="glow g3" aria-hidden="true"></div>
+      <canvas id="hearts" aria-hidden="true"></canvas>
+    </div>
+
+    <main class="shell">
+      <header class="top">
+        <div class="brand" aria-label="Historia nocturna">
+          <span class="brandDot" aria-hidden="true"></span>
+          <span class="brandText">🌙 Mishel</span>
+        </div>
+        <button id="restart" class="ghostBtn" type="button" aria-label="Reiniciar historia">
+          🔄 Reiniciar
+        </button>
+      </header>
+
+      <section class="card" aria-live="polite" aria-atomic="true">
+        <div class="titleRow">
+          <h1 class="title" id="storyTitle">La cafetería que solo abría de noche</h1>
+          <div class="pill" id="chapterPill" aria-label="Capítulo">☕ Cap. 1</div>
+        </div>
+
+        <p class="subtitle" id="subtitle">
+          Elige con calma. Cada camino tiene su final.
+        </p>
+
+        <div class="story">
+          <div class="bubble" id="bubble">
+            <div class="bubbleAccent" aria-hidden="true"></div>
+            <div class="bubbleInner">
+              <p id="line" class="line"></p>
+              <div id="lineMeta" class="lineMeta"></div>
+            </div>
+          </div>
+
+          <div class="choices" id="choices">
+            <button id="yesBtn" class="primaryBtn" type="button">
+              <span class="btnIcon" aria-hidden="true">✅</span>
+              <span id="yesLabel">Sí</span>
+            </button>
+            <button id="noBtn" class="secondaryBtn" type="button">
+              <span class="btnIcon" aria-hidden="true">🚪</span>
+              <span id="noLabel">No</span>
+            </button>
+          </div>
+
+          <div class="continueRow" id="continueRow">
+            <button id="continueBtn" class="primaryBtn" type="button">
+              <span class="btnIcon" aria-hidden="true">📖</span>
+              <span>Continuar</span>
+            </button>
+          </div>
+
+          <section class="level" id="level" aria-label="Laberinto de la cafetería">
+            <div class="levelTop">
+              <div>
+                <div class="levelTitle" id="levelTitle">☕ Laberinto</div>
+                <div class="levelSub" id="levelSub">Llega al objetivo con las flechas.</div>
+              </div>
+              <div class="levelBadge" id="levelBadge">Paso 1</div>
+            </div>
+
+            <div class="gridWrap">
+              <div class="gridMaze" id="gridMaze" role="grid" aria-label="Mapa"></div>
+              <div class="pad" aria-label="Controles">
+                <button type="button" class="padBtn" data-dir="up" aria-label="Arriba">⬆️</button>
+                <div class="padMid">
+                  <button type="button" class="padBtn" data-dir="left" aria-label="Izquierda">⬅️</button>
+                  <button type="button" class="padBtn" data-dir="right" aria-label="Derecha">➡️</button>
+                </div>
+                <button type="button" class="padBtn" data-dir="down" aria-label="Abajo">⬇️</button>
+              </div>
+            </div>
+
+            <div class="levelBottom">
+              <div class="levelHint" id="levelHint">
+                Usa las flechas o el teclado. Las paredes oscuras no se cruzan.
+              </div>
+              <button id="levelContinue" class="secondaryBtn" type="button" disabled>
+                <span class="btnIcon" aria-hidden="true">✨</span>
+                <span>Seguir historia</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footerLeft">
+          <div class="tiny">Hecho con cariño 💙 • para Mishel</div>
+        </div>
+        <div class="footerRight">
+          <a class="tinyLink" href="#" id="copyLine">📋 Copiar frase</a>
+        </div>
+      </footer>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
