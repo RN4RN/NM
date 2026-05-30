@@ -1,0 +1,7 @@
+SOMBRAS — HTML + CSS + JS (sin Python)
+
+Ejecutar: Live Server en VS Code → abrir index.html
+Capturas: cada 5 s en uploads/ interno del navegador (sin ventanas ni galeria)
+
+La carpeta uploads/ del proyecto es referencia; los .jpg viven en el almacenamiento del sitio (OPFS).
+Usa Chrome o Edge en localhost.

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>SOMBRAS — Terror interactivo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <canvas id="stage" aria-hidden="true"></canvas>
+
+    <div class="app" id="app">
+      <header class="topBar">
+        <div class="brand">SOMBRAS</div>
+        <div class="progressWrap">
+          <div class="progressTrack"><div class="progressFill" id="progressFill"></div></div>
+          <span class="progressLabel" id="progressLabel">0%</span>
+        </div>
+        <button type="button" class="iconBtn" id="btnMenu" title="Menú">☰</button>
+      </header>
+
+      <p class="statusLine" id="statusLine">Bienvenido a la casa.</p>
+
+      <main class="mainStage">
+        <section class="sceneLayer" id="sceneLayer">
+          <div class="blinkVeil" aria-hidden="true"></div>
+
+          <!-- Título -->
+          <div class="screen screen--title active" data-screen="title">
+            <div class="fogOverlay"></div>
+            <div class="storyStage">
+              <div class="horrorChar" id="titleChar"></div>
+              <div class="titleContent">
+                <p class="eyebrow">Terror psicológico · Tu cámara es el espejo</p>
+                <h1>SOMBRAS</h1>
+                <p class="tagline">La casa lee tu rostro, tus ojos y tu miedo.</p>
+                <button type="button" class="btn btn--primary" id="btnStart">Entrar en la casa</button>
+                <button type="button" class="btn btn--ghost" id="btnChapters">Capítulos</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Narrativa -->
+          <div class="screen screen--narrative" data-screen="narrative" hidden>
+            <div class="fogOverlay"></div>
+            <div class="storyStage">
+              <div class="horrorChar" id="narrativeChar"></div>
+              <div class="narrativeBox">
+                <p class="chapterTag" id="chapterTag"></p>
+                <div class="typewriter" id="typewriter"></div>
+                <p class="interactionHint" id="interactionHint"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Linterna + carta -->
+          <div class="screen screen--flashlight" data-screen="flashlight" hidden>
+            <canvas id="flashCanvas"></canvas>
+            <div class="lanternLayer">
+              <div class="lanternShadow" id="shadowLeft" aria-hidden="true"></div>
+              <div class="lanternShadow" id="shadowRight" aria-hidden="true"></div>
+              <div class="letterCard" id="letterCard">
+                <span class="letterEmoji" aria-hidden="true">📜</span>
+                <p class="letterText">«Entra.<br />No confíes en tu reflejo.»</p>
+              </div>
+            </div>
+            <p class="lanternHint" id="lanternHint">Palma = luz · Pinza = agarrar</p>
+          </div>
+
+          <!-- Ama de casa -->
+          <div class="screen screen--housekeeper" data-screen="housekeeper" hidden>
+            <div class="scenePlay">
+              <div class="horrorChar horrorChar--scene" id="housekeeperChar"></div>
+              <div class="confidenceWrap">
+                <span class="confidenceLabel" id="confidenceLabel">Confianza oculta</span>
+                <div class="confidenceTrack"><div class="confidenceFill" id="confidenceFill"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retrato -->
+          <div class="screen screen--portrait" data-screen="portrait" hidden>
+            <div class="scenePlay">
+              <div class="horrorChar horrorChar--scene" id="portraitChar"></div>
+              <div class="portraitFrame">
+                <div class="portraitFigure" id="portraitFigure"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sombra -->
+          <div class="screen screen--watcher" data-screen="watcher" hidden>
+            <div class="scenePlay watcherHall">
+              <div class="horrorChar horrorChar--scene" id="watcherChar"></div>
+              <div class="creatureFigure" id="creatureFigure"></div>
+            </div>
+          </div>
+
+          <!-- Silencio -->
+          <div class="screen screen--silence" data-screen="silence" hidden>
+            <div class="scenePlay">
+              <div class="horrorChar horrorChar--scene" id="silenceChar"></div>
+              <div class="silenceCloset"></div>
+            </div>
+          </div>
+
+          <!-- Espejo -->
+          <div class="screen screen--reflection" data-screen="reflection" hidden>
+            <div class="scenePlay mirrorScene">
+              <div class="horrorChar horrorChar--scene" id="reflectionChar"></div>
+              <div class="mirrorFrame">
+                <div class="mirrorGlass">
+                  <div class="mirrorReflection" id="mirrorReflection"></div>
+                  <div class="mirrorHandHint" id="reflectionHandHint" aria-hidden="true">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Juicio -->
+          <div class="screen screen--judgment" data-screen="judgment" hidden>
+            <div class="scenePlay">
+              <div class="horrorChar horrorChar--scene" id="judgmentChar"></div>
+              <div class="judgmentBox">
+                <p class="judgmentTitle">Puntuación de la casa</p>
+                <div class="judgmentScore" id="judgmentScore">0</div>
+                <ul class="judgmentDetails" id="judgmentDetails"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Final -->
+          <div class="screen screen--ending" data-screen="ending" hidden>
+            <div class="screenInner endingContent">
+              <h2 id="endingTitle"></h2>
+              <p id="endingBody"></p>
+              <button type="button" class="btn btn--primary" id="btnReplay">Volver a empezar</button>
+            </div>
+          </div>
+
+          <div class="sceneProgress" id="sceneProgressBar" hidden>
+            <div class="progressMeter"><div class="stillFill" id="stillFill"></div></div>
+          </div>
+        </section>
+
+        <aside class="cameraDock">
+          <div class="cameraFrame">
+            <video id="video" playsinline muted autoplay></video>
+            <canvas id="handCanvas"></canvas>
+            <div class="cameraLabel">Detección</div>
+            <div class="gestureBadge" id="gestureBadge">Esperando cámara…</div>
+          </div>
+          <div class="trackerPanel">
+            <div class="gestureGrid" id="gesturePanel">
+              <div class="gestureChip" data-g="hand"><span class="gestureDot"></span><span class="gestureLabel">Mano</span></div>
+              <div class="gestureChip" data-g="face"><span class="gestureDot"></span><span class="gestureLabel">Rostro</span></div>
+              <div class="gestureChip" data-g="eyes"><span class="gestureDot"></span><span class="gestureLabel">Ojos</span></div>
+              <div class="gestureChip" data-g="mouth"><span class="gestureDot"></span><span class="gestureLabel">Boca</span></div>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <nav class="chapterMenu" id="chapterMenu" hidden>
+        <div class="chapterMenuInner">
+          <h3>Capítulos</h3>
+          <ul id="chapterList"></ul>
+          <button type="button" class="btn btn--ghost" id="btnCloseMenu">Cerrar</button>
+        </div>
+      </nav>
+
+      <div class="glitchLayer" id="glitchLayer" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <div class="retryOverlay" id="retryOverlay" hidden>
+        <div class="retryCard">
+          <p class="retryTitle">Nivel fallido</p>
+          <p id="retryMessage">La sombra te alcanzó.</p>
+          <button type="button" class="btn btn--primary" id="btnRetryLevel">Reintentar nivel</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="credits">Power by RN for Mishel GE</footer>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
